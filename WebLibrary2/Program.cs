@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebLibrary.Data.Entities;
 using WebLibrary.Data.Repositories;
+using WebLibrary.Data.Repositories.Interfaces;
+using WebLibrary.Services;
+using WebLibrary.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<WebLibraryContext>(x =>
+builder.Services.AddDbContext<WebLibraryDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -22,7 +25,12 @@ builder.Services
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
     })
-    .AddEntityFrameworkStores<WebLibraryContext>();
+    .AddEntityFrameworkStores<WebLibraryDbContext>();
+
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddAutoMapper(typeof(WebLibrary.Web.MapperProfile));
+builder.Services.AddAutoMapper(typeof(WebLibrary.Data.MapperProfile));
 
 var app = builder.Build();
 

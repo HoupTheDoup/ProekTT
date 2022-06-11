@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebLibrary.Data.Repositories;
 
@@ -11,9 +12,10 @@ using WebLibrary.Data.Repositories;
 namespace WebLibrary.Data.Migrations
 {
     [DbContext(typeof(WebLibraryDbContext))]
-    partial class WebLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220609205832_AddEntityClasses")]
+    partial class AddEntityClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,7 +192,7 @@ namespace WebLibrary.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("AuthorEntities");
                 });
 
             modelBuilder.Entity("WebLibrary.Data.Entities.BookEntity", b =>
@@ -199,15 +201,15 @@ namespace WebLibrary.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AuthorId")
+                    b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PublisherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PublisherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -215,7 +217,7 @@ namespace WebLibrary.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Books");
+                    b.ToTable("BookEntities");
                 });
 
             modelBuilder.Entity("WebLibrary.Data.Entities.GenreEntity", b =>
@@ -395,11 +397,15 @@ namespace WebLibrary.Data.Migrations
                 {
                     b.HasOne("WebLibrary.Data.Entities.AuthorEntity", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WebLibrary.Data.Entities.PublisherEntity", "Publisher")
                         .WithMany("Books")
-                        .HasForeignKey("PublisherId");
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
 

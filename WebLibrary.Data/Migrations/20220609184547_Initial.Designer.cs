@@ -11,7 +11,7 @@ using WebLibrary.Data.Repositories;
 
 namespace WebLibrary.Data.Migrations
 {
-    [DbContext(typeof(WebLibraryContext))]
+    [DbContext(typeof(WebLibraryDbContext))]
     [Migration("20220609184547_Initial")]
     partial class Initial
     {

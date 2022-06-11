@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebLibrary.Services.Dtos
+namespace WebLibrary.Domain.Dtos
 {
-    public class BookDto
+    public class BookDto : BaseDto
     {
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         public string Author { get; set; }
     }
