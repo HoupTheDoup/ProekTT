@@ -8,7 +8,9 @@ namespace WebLibrary.Domain.Dtos
 {
     public class AuthorDto : BaseDto
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public string YearOfPublshing { get; set; }
 

@@ -22,5 +22,10 @@ namespace WebLibrary.Services
         public Guid UpdateBook(BookDto book) => _bookRepository.UpdateBook(book);
 
         public List<BookDto> GetAll() => _bookRepository.GetAll();
+
+        public void DetailsBook(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

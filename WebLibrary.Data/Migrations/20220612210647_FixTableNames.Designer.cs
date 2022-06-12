@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebLibrary.Data.Repositories;
 
@@ -11,9 +12,10 @@ using WebLibrary.Data.Repositories;
 namespace WebLibrary.Data.Migrations
 {
     [DbContext(typeof(WebLibraryDbContext))]
-    partial class WebLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220612210647_FixTableNames")]
+    partial class FixTableNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

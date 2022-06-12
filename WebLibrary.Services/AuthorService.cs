@@ -27,5 +27,7 @@ namespace WebLibrary.Services
         public Guid UpdateAuthor(AuthorDto book) => _authorRepository.UpdateAuthor(book);
 
         public List<AuthorDto> GetAll() => _authorRepository.GetAll();
+
+        public string? GetAuthorName(Guid id) => _authorRepository.GetAuthorName(id);
     }
 }

@@ -1,7 +1,10 @@
 ﻿namespace WebLibrary.Web.Models.Books
 {
+
     public class BookViewModel
     {
+        public Guid Id { get; set; }
+
         public string Title { get; set; }
 
         public string AuthorName { get; set; }

@@ -38,7 +38,7 @@ namespace WebLibrary.Data.Repositories
             BookEntity book = _mapper.Map<BookEntity>(GetBookById(id));
             if(book != null)
             {
-                _dbContext.Books.Remove(book);
+                _dbContext.Remove(book);
                 _dbContext.SaveChanges();
             }
         }

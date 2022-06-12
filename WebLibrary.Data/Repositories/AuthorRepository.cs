@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebLibrary.Data.Entities;
+using WebLibrary.Data.Repositories.Interfaces;
 using WebLibrary.Domain.Dtos;
 
 namespace WebLibrary.Data.Repositories
 {
-    public class AuthorRepository
+    public class AuthorRepository : IAuthorRepository
     {
         protected readonly WebLibraryDbContext _dbContext;
         protected readonly IMapper _mapper;
@@ -33,7 +29,7 @@ namespace WebLibrary.Data.Repositories
 
         public void DeleteAuthor(Guid id)
         {
-            AuthorEntity author = _mapper.Map<AuthorEntity>(GetAuthorById(id));
+            AuthorEntity author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
             if (author != null)
             {
                 _dbContext.Authors.Remove(author);
@@ -48,14 +44,21 @@ namespace WebLibrary.Data.Repositories
 
         public Guid UpdateAuthor(AuthorDto author)
         {
-            _dbContext.Authors.Update(_mapper.Map<AuthorEntity>(author));
+            _dbContext.Update(_mapper.Map<AuthorEntity>(author));
             _dbContext.SaveChanges();
 
             return author.Id;
         }
         public List<AuthorDto> GetAll()
         {
-            return _mapper.Map<List<AuthorDto>>(_dbContext.Authors.ToList());
+            var authors = _dbContext.Authors.ToList();
+            return _mapper.Map<List<AuthorDto>>(authors);
+        }
+
+        public string? GetAuthorName(Guid id)
+        {
+            var author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
+            return $"{author.FirstName} {author.LastName}";
         }
     }
 }

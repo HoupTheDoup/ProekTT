@@ -28,7 +28,14 @@ builder.Services
     .AddEntityFrameworkStores<WebLibraryDbContext>();
 
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IPublisherService, PublisherService>();
+//builder.Services.AddScoped<IGenreService, GenreService>();
+
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
+//builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddAutoMapper(typeof(WebLibrary.Web.MapperProfile));
 builder.Services.AddAutoMapper(typeof(WebLibrary.Data.MapperProfile));
 

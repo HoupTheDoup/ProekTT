@@ -14,6 +14,10 @@ namespace WebLibrary.Data
         public MapperProfile()
         {
             CreateMap<BookEntity, BookDto>().ReverseMap();
+            CreateMap<AuthorEntity, AuthorDto>().ReverseMap();
+            CreateMap<PublisherEntity, PublisherDto>().ReverseMap();
+            //CreateMap<GenreEntity, GenreDto>().ReverseMap();
+
         }   
     }
 

@@ -21,7 +21,7 @@ namespace WebLibrary.Web.Controllers
         public IActionResult Index()
         {
             var list = _bookService.GetAll();
-            return View(_mapper.Map<IEnumerable<BookViewModel>>(list));
+            return View(_mapper.Map<List<BookViewModel>>(list));
         }
 
         public IActionResult AddBook(BookCreateModel book)
@@ -32,6 +32,33 @@ namespace WebLibrary.Web.Controllers
             }    
 
             _bookService.CreateBook(_mapper.Map<BookDto>(book));
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditBook(BookCreateModel book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _bookService.CreateBook(_mapper.Map<BookDto>(book));
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteBook(Guid id)
+        {
+            _bookService.DeleteBook(id);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DetailsBook(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             return RedirectToAction("Index");
         }
     }
