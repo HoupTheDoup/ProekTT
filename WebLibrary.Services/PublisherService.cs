@@ -11,21 +11,23 @@ namespace WebLibrary.Services
 {
     public class PublisherService : IPublisherService
     {
-        protected readonly IPublisherRepository _authorRepository;
+        protected readonly IPublisherRepository _publisherRepository;
 
-        public PublisherService(IPublisherRepository authorRepository)
+        public PublisherService(IPublisherRepository publisherRepository)
         {
-            _authorRepository = authorRepository;
+            _publisherRepository = publisherRepository;
         }
 
-        public Guid CreatePublisher(PublisherDto book) => _authorRepository.CreatePublisher(book);
+        public Guid CreatePublisher(PublisherDto book) => _publisherRepository.CreatePublisher(book);
 
-        public void DeletePublisher(Guid id) => _authorRepository.DeletePublisher(id);
+        public void DeletePublisher(Guid id) => _publisherRepository.DeletePublisher(id);
 
-        public PublisherDto GetPublisherById(Guid id) => _authorRepository.GetPublisherById(id);
+        public PublisherDto GetPublisherById(Guid id) => _publisherRepository.GetPublisherById(id);
 
-        public Guid UpdatePublisher(PublisherDto book) => _authorRepository.UpdatePublisher(book);
+        public Guid UpdatePublisher(PublisherDto book) => _publisherRepository.UpdatePublisher(book);
 
-        public List<PublisherDto> GetAll() => _authorRepository.GetAll();
+        public List<PublisherDto> GetAll() => _publisherRepository.GetAll();
+
+        public string? GetPublisherName(Guid id) => _publisherRepository.GetPublisherName(id);
     }
 }

@@ -34,7 +34,7 @@ namespace WebLibrary.Data.Repositories
 
         public void DeletePublisher(Guid id)
         {
-            PublisherEntity publisher = _mapper.Map<PublisherEntity>(GetPublisherById(id));
+            PublisherEntity publisher = _dbContext.Publishers.FirstOrDefault(p => p.Id == id);
             if (publisher != null)
             {
                 _dbContext.Publishers.Remove(publisher);
@@ -58,6 +58,14 @@ namespace WebLibrary.Data.Repositories
         {
             return _mapper.Map<List<PublisherDto>>(_dbContext.Publishers.ToList());
         }
+
+        public string? GetPublisherName(Guid id)
+        {
+            var publisher = _dbContext.Publishers.FirstOrDefault(a => a.Id == id);
+            return publisher.Name;
+        }
+
+
 
 
     }

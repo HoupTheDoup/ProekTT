@@ -18,5 +18,8 @@ namespace WebLibrary.Services.Interfaces
         public PublisherDto GetPublisherById(Guid id);
 
         public List<PublisherDto> GetAll();
+
+        public string GetPublisherName(Guid id);
+
     }
 }

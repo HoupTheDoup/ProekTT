@@ -10,6 +10,8 @@ namespace WebLibrary.Domain.Dtos
     {
         public string Title { get; set; }
 
-        public string Author { get; set; }
+        public string AuthorId { get; set; }
+
+        public string PublisherId { get; set; }
     }
 }

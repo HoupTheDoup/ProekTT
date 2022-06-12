@@ -2,64 +2,80 @@
 using Microsoft.AspNetCore.Mvc;
 using WebLibrary.Domain.Dtos;
 using WebLibrary.Services.Interfaces;
+using WebLibrary.Web.Models.AuthorModels;
 using WebLibrary.Web.Models.BookModels;
 using WebLibrary.Web.Models.Books;
+using WebLibrary.Web.Models.PublisherModels;
 
 namespace WebLibrary.Web.Controllers
 {
     public class BookController : Controller
     {
+        protected readonly IPublisherService _publisherService;
+        protected readonly IAuthorService _authorService;
         protected readonly IBookService _bookService;
         protected readonly IMapper _mapper;
 
-        public BookController(IBookService bookService, IMapper mapper)
+        public BookController(IBookService bookService, IAuthorService authorService, IPublisherService publisherService, IMapper mapper)
         {
+            _publisherService = publisherService;
+            _authorService = authorService;
             _bookService = bookService;
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult ListBooks()
         {
-            var list = _bookService.GetAll();
-            return View(_mapper.Map<List<BookViewModel>>(list));
+            List<BookViewModel> books = _mapper.Map<List<BookViewModel>>(_bookService.GetAll());
+            foreach (var book in books)
+            {
+                book.AuthorName = _authorService.GetAuthorName(book.AuthorId);
+                book.PublisherName = _publisherService.GetPublisherName(book.PublisherId);
+            }
+            return View(books);
         }
 
+        [HttpGet]
+        public IActionResult AddBook()
+        {
+            List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
+            foreach (var author in authors)
+            {
+                author.Name = _authorService.GetAuthorName(author.Id);
+            }
+            List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
+            ViewBag.Authors = authors;
+            ViewBag.Publishers = publisher;
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult AddBook(BookCreateModel book)
         {
-            if(!ModelState.IsValid)
-            {
-                return View();
-            }    
-
-            _bookService.CreateBook(_mapper.Map<BookDto>(book));
-            return RedirectToAction("Index");
+            BookDto newBook = _mapper.Map<BookDto>(book);
+            _bookService.CreateBook(newBook);
+            return RedirectToAction("ListBooks");
         }
 
+        [HttpGet]
+        public IActionResult EditBook(Guid id)
+        {
+            var book = _bookService.GetBookById(id);
+            return View(_mapper.Map<BookCreateModel>(book));
+        }
+
+        [HttpPost]
         public IActionResult EditBook(BookCreateModel book)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            _bookService.CreateBook(_mapper.Map<BookDto>(book));
-            return RedirectToAction("Index");
+            _bookService.UpdateBook(_mapper.Map<BookDto>(book));
+            return RedirectToAction("ListBooks");
         }
 
         public IActionResult DeleteBook(Guid id)
         {
             _bookService.DeleteBook(id);
-
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult DetailsBook(Guid id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            return RedirectToAction("Index");
+            return RedirectToAction("ListBooks");
         }
     }
 }
