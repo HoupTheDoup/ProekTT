@@ -19,6 +19,6 @@ namespace WebLibrary.Data.Repositories.Interfaces
 
         public List<AuthorDto> GetAll();
 
-        public string GetAuthorName(Guid id);
+      //  public string GetAuthorName(Guid id);
     }
 }

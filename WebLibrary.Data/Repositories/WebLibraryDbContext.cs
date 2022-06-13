@@ -17,5 +17,7 @@ namespace WebLibrary.Data.Repositories
         public DbSet<AuthorEntity> Authors { get; set; }
 
         public DbSet<PublisherEntity> Publishers { get; set; }
+
+        public DbSet<GenreEntity> Genres { get; set; }
     }
 }

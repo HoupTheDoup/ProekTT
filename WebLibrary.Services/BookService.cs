@@ -21,7 +21,7 @@ namespace WebLibrary.Services
 
         public Guid UpdateBook(BookDto book) => _bookRepository.UpdateBook(book);
 
-        public List<BookDto> GetAll() => _bookRepository.GetAll();
+        public IEnumerable<T> GetAll<T>() => _bookRepository.GetAll<T>();
 
         public void DetailsBook(Guid id)
         {

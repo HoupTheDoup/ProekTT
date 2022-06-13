@@ -27,12 +27,7 @@ namespace WebLibrary.Web.Controllers
         [HttpGet]
         public IActionResult ListBooks()
         {
-            List<BookViewModel> books = _mapper.Map<List<BookViewModel>>(_bookService.GetAll());
-            foreach (var book in books)
-            {
-                book.AuthorName = _authorService.GetAuthorName(book.AuthorId);
-                book.PublisherName = _publisherService.GetPublisherName(book.PublisherId);
-            }
+            var books = _bookService.GetAll<BookViewModel>();
             return View(books);
         }
 
@@ -40,10 +35,6 @@ namespace WebLibrary.Web.Controllers
         public IActionResult AddBook()
         {
             List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
-            foreach (var author in authors)
-            {
-                author.Name = _authorService.GetAuthorName(author.Id);
-            }
             List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
             ViewBag.Authors = authors;
             ViewBag.Publishers = publisher;

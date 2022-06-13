@@ -18,6 +18,6 @@ namespace WebLibrary.Data.Repositories.Interfaces
 
         public BookDto GetBookById(Guid id);
 
-        public List<BookDto> GetAll(); 
+        public IEnumerable<T> GetAll<T>(); 
     }
 }

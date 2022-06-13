@@ -23,10 +23,11 @@ namespace WebLibrary.Web.Controllers
         {
            
             List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
-            foreach (var author in authors)
+         /*   foreach (var author in authors)
             {
                 author.Name = _authorService.GetAuthorName(author.Id);
             }
+         */
             return View(authors);
         }
 

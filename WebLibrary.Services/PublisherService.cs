@@ -18,13 +18,13 @@ namespace WebLibrary.Services
             _publisherRepository = publisherRepository;
         }
 
-        public Guid CreatePublisher(PublisherDto book) => _publisherRepository.CreatePublisher(book);
+        public Guid CreatePublisher(PublisherDto publisher) => _publisherRepository.CreatePublisher(publisher);
 
         public void DeletePublisher(Guid id) => _publisherRepository.DeletePublisher(id);
 
         public PublisherDto GetPublisherById(Guid id) => _publisherRepository.GetPublisherById(id);
 
-        public Guid UpdatePublisher(PublisherDto book) => _publisherRepository.UpdatePublisher(book);
+        public Guid UpdatePublisher(PublisherDto publisher) => _publisherRepository.UpdatePublisher(publisher);
 
         public List<PublisherDto> GetAll() => _publisherRepository.GetAll();
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,9 +56,9 @@ namespace WebLibrary.Data.Repositories
 
             return book.Id;
         }
-        public List<BookDto> GetAll()
+        public IEnumerable<T> GetAll<T>()
         {
-            return _mapper.Map<List<BookDto>>(_dbContext.Books.ToList());
+            return _dbContext.Books.ProjectTo<T>(_mapper.ConfigurationProvider).ToList();
         }
 
     }
