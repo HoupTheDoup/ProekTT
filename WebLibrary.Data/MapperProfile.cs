@@ -16,7 +16,7 @@ namespace WebLibrary.Data
             CreateMap<BookEntity, BookDto>().ReverseMap();
             CreateMap<AuthorEntity, AuthorDto>().ReverseMap();
             CreateMap<PublisherEntity, PublisherDto>().ReverseMap();
-            //CreateMap<GenreEntity, GenreDto>().ReverseMap();
+            CreateMap<GenreEntity, GenreDto>().ReverseMap();
 
         }   
     }

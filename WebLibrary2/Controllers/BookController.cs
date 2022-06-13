@@ -5,6 +5,7 @@ using WebLibrary.Services.Interfaces;
 using WebLibrary.Web.Models.AuthorModels;
 using WebLibrary.Web.Models.BookModels;
 using WebLibrary.Web.Models.Books;
+using WebLibrary.Web.Models.GenreModels;
 using WebLibrary.Web.Models.PublisherModels;
 
 namespace WebLibrary.Web.Controllers
@@ -14,13 +15,15 @@ namespace WebLibrary.Web.Controllers
         protected readonly IPublisherService _publisherService;
         protected readonly IAuthorService _authorService;
         protected readonly IBookService _bookService;
+        protected readonly IGenreService _genreService;
         protected readonly IMapper _mapper;
 
-        public BookController(IBookService bookService, IAuthorService authorService, IPublisherService publisherService, IMapper mapper)
+        public BookController(IBookService bookService, IAuthorService authorService, IPublisherService publisherService, IGenreService genreService, IMapper mapper)
         {
-            _publisherService = publisherService;
-            _authorService = authorService;
             _bookService = bookService;
+            _authorService = authorService;
+            _publisherService = publisherService;
+            _genreService = genreService;
             _mapper = mapper;
         }
 
@@ -36,8 +39,10 @@ namespace WebLibrary.Web.Controllers
         {
             List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
             List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
+            List<GenreCreateModel> genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
             ViewBag.Authors = authors;
             ViewBag.Publishers = publisher;
+            ViewBag.Genres = genres;
             return View();
         }
 
@@ -52,6 +57,13 @@ namespace WebLibrary.Web.Controllers
         [HttpGet]
         public IActionResult EditBook(Guid id)
         {
+            List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
+            List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
+            List<GenreCreateModel> genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
+            ViewBag.Authors = authors;
+            ViewBag.Publishers = publisher;
+            ViewBag.Genres = genres;
+
             var book = _bookService.GetBookById(id);
             return View(_mapper.Map<BookCreateModel>(book));
         }
@@ -68,5 +80,34 @@ namespace WebLibrary.Web.Controllers
             _bookService.DeleteBook(id);
             return RedirectToAction("ListBooks");
         }
+
+        [HttpGet]
+        public IActionResult AddGenre()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddGenre(GenreCreateModel genre)
+        {
+            GenreDto newGenre = _mapper.Map<GenreDto>(genre);
+            _genreService.CreateGenre(newGenre);
+            return RedirectToAction("AddBook");
+        }
+
+        public IActionResult DeleteGenre(Guid id)
+        {
+            _genreService.DeleteGenre(id);
+            return RedirectToAction("AddBook");
+        }
+
+        [HttpGet]
+        public IActionResult ListGenres()
+        {
+            var genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
+            return View(genres);
+        }
+
+
     }
 }

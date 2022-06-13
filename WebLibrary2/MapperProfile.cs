@@ -4,6 +4,7 @@ using WebLibrary.Domain.Dtos;
 using WebLibrary.Web.Models.AuthorModels;
 using WebLibrary.Web.Models.BookModels;
 using WebLibrary.Web.Models.Books;
+using WebLibrary.Web.Models.GenreModels;
 using WebLibrary.Web.Models.PublisherModels;
 
 namespace WebLibrary.Web
@@ -21,6 +22,7 @@ namespace WebLibrary.Web
             CreateMap<AuthorCreateModel, AuthorDto>().ReverseMap();
             CreateMap<PublisherViewModel, PublisherDto>().ReverseMap();
             CreateMap<PublisherCreateModel, PublisherDto>().ReverseMap();
+            CreateMap<GenreCreateModel, GenreDto>().ReverseMap();
         }
     }
 }

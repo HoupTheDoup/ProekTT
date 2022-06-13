@@ -36,7 +36,7 @@ namespace WebLibrary.Data.Repositories
 
         public void DeleteBook(Guid id)
         {
-            BookEntity book = _mapper.Map<BookEntity>(GetBookById(id));
+            BookEntity book = _dbContext.Books.FirstOrDefault(a => a.Id == id);
             if(book != null)
             {
                 _dbContext.Remove(book);
@@ -51,7 +51,7 @@ namespace WebLibrary.Data.Repositories
 
         public Guid UpdateBook(BookDto book)
         {
-            _dbContext.Books.Update(_mapper.Map<BookEntity>(book));
+            _dbContext.Update(_mapper.Map<BookEntity>(book));
             _dbContext.SaveChanges();
 
             return book.Id;

@@ -34,7 +34,7 @@ namespace WebLibrary.Data.Repositories
 
         public void DeleteGenre(Guid id)
         {
-            GenreEntity genre = _mapper.Map<GenreEntity>(GetGenreById(id));
+            GenreEntity genre = _dbContext.Genres.FirstOrDefault(a => a.Id == id);
             if (genre != null)
             {
                 _dbContext.Remove(genre);
@@ -47,9 +47,9 @@ namespace WebLibrary.Data.Repositories
             return _mapper.Map<GenreDto>(genre);
         }
 
-        public List<PublisherDto> GetAll()
+        public List<GenreDto> GetAll()
         {
-            return _mapper.Map<List<PublisherDto>>(_dbContext.Publishers.ToList());
+            return _mapper.Map<List<GenreDto>>(_dbContext.Genres.ToList());
         }
     }
 }

@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.PublisherName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditBook", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "DetailsBook", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "DeleteBook", new { id = item.Id })
+                <a asp-action="EditBook" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="DeleteBook" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
