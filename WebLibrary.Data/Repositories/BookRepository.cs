@@ -51,7 +51,7 @@ namespace WebLibrary.Data.Repositories
 
         public Guid UpdateBook(BookDto book)
         {
-            _dbContext.Update(_mapper.Map<BookEntity>(book));
+            _dbContext.Books.Update(_mapper.Map<BookEntity>(book));
             _dbContext.SaveChanges();
 
             return book.Id;

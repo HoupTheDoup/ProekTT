@@ -9,9 +9,9 @@ namespace WebLibrary.Data.Repositories.Interfaces
 {
     public interface IPublisherRepository
     {
-        public Guid CreatePublisher(PublisherDto book);
+        public Guid CreatePublisher(PublisherDto publisher);
 
-        public Guid UpdatePublisher(PublisherDto book);
+        public Guid UpdatePublisher(PublisherDto publisher);
 
         public void DeletePublisher(Guid id);
 

@@ -13,7 +13,7 @@ namespace WebLibrary.Web
     {
         public MapperProfile()
         {
-            //CreateMap<BookViewModel, BookDto>().ReverseMap();
+            CreateMap<BookViewModel, BookDto>().ReverseMap();
 
             CreateMap<BookEntity, BookViewModel>().ForMember(x => x.AuthorName, x =>  x.MapFrom(y => $"{y.Author.FirstName} {y.Author.LastName}"));
 

@@ -1,4 +1,6 @@
-﻿namespace WebLibrary.Web.Models.PublisherModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebLibrary.Web.Models.PublisherModels
 {
     public class PublisherCreateModel
     {
@@ -10,6 +12,7 @@
 
         public string Address { get; set; }
 
+        [Phone]
         public string PhoneNumber { get; set; }
     }
 }
