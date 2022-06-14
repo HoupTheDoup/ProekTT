@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebLibrary.Domain.Dtos;
 using WebLibrary.Services.Interfaces;
@@ -26,12 +27,14 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult AddPublisher()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddPublisher(PublisherCreateModel publisher)
         {
             PublisherDto newPublisher = _mapper.Map<PublisherDto>(publisher);

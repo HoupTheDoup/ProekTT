@@ -32,7 +32,7 @@ namespace WebLibrary.Data.Repositories
             AuthorEntity author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
             if (author != null)
             {
-                _dbContext.Authors.Remove(author);
+                _dbContext.Remove(author);
                 _dbContext.SaveChanges();
             }
         }
@@ -55,11 +55,11 @@ namespace WebLibrary.Data.Repositories
             return _mapper.Map<List<AuthorDto>>(authors);
         }
 
-     /*   public string? GetAuthorName(Guid id)
-        {
-            var author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
-            return $"{author.FirstName} {author.LastName}";
-        }
-     */
+        /*   public string? GetAuthorName(Guid id)
+           {
+               var author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
+               return $"{author.FirstName} {author.LastName}";
+           }
+        */
     }
 }

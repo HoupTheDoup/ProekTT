@@ -9,16 +9,15 @@ namespace WebLibrary.Data.Repositories.Interfaces
 {
     public interface IAuthorRepository
     {
-        public Guid CreateAuthor(AuthorDto book);
+        public Guid CreateAuthor(AuthorDto author);
 
-        public Guid UpdateAuthor(AuthorDto book);
+        public Guid UpdateAuthor(AuthorDto author);
 
         public void DeleteAuthor(Guid id);
 
         public AuthorDto GetAuthorById(Guid id);
 
         public List<AuthorDto> GetAll();
-
       //  public string GetAuthorName(Guid id);
     }
 }

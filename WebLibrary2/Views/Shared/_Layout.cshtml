@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using WebLibrary.Data.Entities
-@inject SignInManager<UserEntity> SignInManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="ListBooks">ListBook</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(this.User))
+                        @if (this.User.IsInRole("admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="AddBook">AddBook</a>

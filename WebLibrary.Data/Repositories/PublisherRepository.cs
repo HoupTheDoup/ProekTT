@@ -37,7 +37,7 @@ namespace WebLibrary.Data.Repositories
             PublisherEntity publisher = _dbContext.Publishers.FirstOrDefault(p => p.Id == id);
             if (publisher != null)
             {
-                _dbContext.Publishers.Remove(publisher);
+                _dbContext.Remove(publisher);
                 _dbContext.SaveChanges();
             }
         }

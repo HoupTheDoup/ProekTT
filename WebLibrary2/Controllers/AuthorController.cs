@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebLibrary.Domain.Dtos;
 using WebLibrary.Services.Interfaces;
@@ -32,12 +33,14 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult AddAuthor()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddAuthor(AuthorCreateModel author)
         {
             AuthorDto newAuthor = _mapper.Map<AuthorDto>(author);

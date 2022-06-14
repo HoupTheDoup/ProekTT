@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebLibrary.Data.Entities;
 using WebLibrary.Data.Repositories;
 using WebLibrary.Data.Repositories.Interfaces;
 using WebLibrary.Services;
 using WebLibrary.Services.Interfaces;
+using WebLibrary.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,7 @@ builder.Services
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<WebLibraryDbContext>();
 
 builder.Services.AddScoped<IBookService, BookService>();
@@ -39,7 +42,11 @@ builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddAutoMapper(typeof(WebLibrary.Web.MapperProfile));
 builder.Services.AddAutoMapper(typeof(WebLibrary.Data.MapperProfile));
 
+
 var app = builder.Build();
+
+await app.SeedRolesAsync();
+await app.SeedUsersAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebLibrary.Domain.Dtos;
 using WebLibrary.Services.Interfaces;
@@ -35,6 +36,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="admin")]
         public IActionResult AddBook()
         {
             List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
@@ -47,6 +49,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddBook(BookCreateModel book)
         {
             BookDto newBook = _mapper.Map<BookDto>(book);
