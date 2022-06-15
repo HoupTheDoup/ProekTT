@@ -44,6 +44,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult EditAuthor(Guid id)
         {
             var author = _authorService.GetAuthorById(id);
@@ -51,12 +52,14 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult EditAuthor(AuthorCreateModel author)
         {
             _authorService.UpdateAuthor(_mapper.Map<AuthorDto>(author));
             return RedirectToAction("ListAuthors");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteAuthor(Guid id)
         {
             _authorService.DeleteAuthor(id);

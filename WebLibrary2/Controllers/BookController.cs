@@ -58,6 +58,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult EditBook(Guid id)
         {
             List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
@@ -72,12 +73,14 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult EditBook(BookCreateModel book)
         {
             _bookService.UpdateBook(_mapper.Map<BookDto>(book));
             return RedirectToAction("ListBooks");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteBook(Guid id)
         {
             _bookService.DeleteBook(id);
@@ -85,12 +88,14 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult AddGenre()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddGenre(GenreCreateModel genre)
         {
             GenreDto newGenre = _mapper.Map<GenreDto>(genre);
@@ -98,12 +103,14 @@ namespace WebLibrary.Web.Controllers
             return RedirectToAction("AddBook");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteGenre(Guid id)
         {
             _genreService.DeleteGenre(id);
             return RedirectToAction("AddBook");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult ListGenres()
         {

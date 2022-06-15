@@ -19,6 +19,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult ListPublishers()
         {
 
@@ -44,6 +45,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult EditPublisher(Guid id)
         {
             var publisher = _publisherService.GetPublisherById(id);
@@ -51,6 +53,7 @@ namespace WebLibrary.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult EditPublisher(PublisherCreateModel publisher)
         {
             if (!ModelState.IsValid) return View(publisher);
@@ -58,6 +61,7 @@ namespace WebLibrary.Web.Controllers
             return RedirectToAction("ListPublishers");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeletePublisher(Guid id)
         {
             _publisherService.DeletePublisher(id);

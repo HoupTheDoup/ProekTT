@@ -6,10 +6,14 @@ namespace WebLibrary.Web.Models.PublisherModels
     {
         public Guid id { get; set; }
 
+        [Required(ErrorMessage = "Title is required")]
+        [MinLength(3, ErrorMessage = "Title must be more than 2 letters")]
         public string Name { get; set; }
 
+        [Range(0,2022)]
         public string YearOfPublshing { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
         [Phone]
