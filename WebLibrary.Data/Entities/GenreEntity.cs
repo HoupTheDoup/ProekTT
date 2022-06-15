@@ -8,10 +8,5 @@ namespace WebLibrary.Data.Entities
         public string Name { get; set; }
 
         public ICollection<BookEntity> Books { get; set; } = new HashSet<BookEntity>();
-
-
-
-
-
     }
 }

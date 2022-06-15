@@ -5,10 +5,6 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="AddBook">Add New Book</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -20,6 +16,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PublisherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreName)
             </th>
             <th></th>
         </tr>
@@ -34,12 +33,18 @@
                 @Html.DisplayFor(modelItem => item.AuthorName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PublisherName)
+                <a asp-action="DetailsPublisher" asp-controller="Publisher" asp-route-id="@item.PublisherId"> @Html.DisplayFor(modelItem => item.PublisherName)</a>
             </td>
             <td>
-                <a asp-action="EditBook" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="DeleteBook" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.GenreName)
+            </td>
+            <td>
+                @if (this.User.IsInRole("admin"))
+                {
+                        <a asp-action="DeleteBook" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="EditBook" asp-route-id="@item.Id">Edit</a> 
+                }
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

@@ -37,6 +37,7 @@ namespace WebLibrary.Web.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult AddPublisher(PublisherCreateModel publisher)
         {
+            if(!ModelState.IsValid) return View(publisher);
             PublisherDto newPublisher = _mapper.Map<PublisherDto>(publisher);
             _publisherService.CreatePublisher(newPublisher);
             return RedirectToAction("ListPublishers");
@@ -52,6 +53,7 @@ namespace WebLibrary.Web.Controllers
         [HttpPost]
         public IActionResult EditPublisher(PublisherCreateModel publisher)
         {
+            if (!ModelState.IsValid) return View(publisher);
             _publisherService.UpdatePublisher(_mapper.Map<PublisherDto>(publisher));
             return RedirectToAction("ListPublishers");
         }
@@ -61,5 +63,12 @@ namespace WebLibrary.Web.Controllers
             _publisherService.DeletePublisher(id);
             return RedirectToAction("ListPublishers");
         }
+
+        public IActionResult DetailsPublisher(Guid id)
+        {
+            var publisher = _publisherService.GetPublisherById(id);
+            return View(_mapper.Map<PublisherViewModel>(publisher));
+        }
+
     }
 }

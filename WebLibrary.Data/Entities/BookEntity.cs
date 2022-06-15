@@ -17,7 +17,10 @@ namespace WebLibrary.Data.Entities
 
         public virtual PublisherEntity Publisher { get; set; }
 
-        public ICollection<GenreEntity> Genres { get; set; } = new HashSet<GenreEntity>();
+        [Required]
+        public Guid GenreId { get; set; }
+
+        public virtual GenreEntity Genre { get; set; }
 
 
     }

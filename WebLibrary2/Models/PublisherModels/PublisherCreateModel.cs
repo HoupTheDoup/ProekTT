@@ -13,6 +13,7 @@ namespace WebLibrary.Web.Models.PublisherModels
         public string Address { get; set; }
 
         [Phone]
+       // [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
         public string PhoneNumber { get; set; }
     }
 }

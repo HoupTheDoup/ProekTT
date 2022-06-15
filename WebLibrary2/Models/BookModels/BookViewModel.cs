@@ -14,5 +14,9 @@
         public string PublisherName { get; set; }
 
         public Guid PublisherId { get; set; }
+
+        public string GenreName { get; set; }
+
+        public Guid GenreId { get; set; }
     }
 }

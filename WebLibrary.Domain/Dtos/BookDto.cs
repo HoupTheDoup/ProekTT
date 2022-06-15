@@ -13,5 +13,7 @@ namespace WebLibrary.Domain.Dtos
         public string AuthorId { get; set; }
 
         public string PublisherId { get; set; }
+
+        public string GenreId { get; set; }
     }
 }
