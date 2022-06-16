@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebLibrary.Web.Models.AuthorModels;
+using WebLibrary.Web.Models.GenreModels;
+using WebLibrary.Web.Models.PublisherModels;
 
 namespace WebLibrary.Web.Models.BookModels
 {
@@ -12,8 +15,14 @@ namespace WebLibrary.Web.Models.BookModels
 
         public Guid AuthorId { get; set; }
 
+        public List<AuthorViewModel>? Authors { get; set; }
+
         public Guid PublisherId { get; set; }
 
+        public List<PublisherViewModel>? Publishers { get; set; }
+
         public Guid GenreId { get; set; }
+
+        public List<GenreCreateModel>? Genres { get; set; }
     }
 }

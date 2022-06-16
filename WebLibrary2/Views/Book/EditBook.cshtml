@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label asp-for="AuthorId" class="control-label"></label>
                 <select asp-for="AuthorId" class="form-control">
-                   @foreach(var author in ViewBag.Authors)
+                   @foreach(var author in Model.Authors)
                    {
                        <option value="@author.Id">@author.Name</option>
                    }
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <label asp-for="PublisherId" class="control-label"></label>
                 <select asp-for="PublisherId" class="form-control">
-                   @foreach(var publisher in ViewBag.Publishers)
+                   @foreach(var publisher in Model.Publishers)
                    {
                        <option value="@publisher.Id">@publisher.Name</option>
                    }
@@ -38,7 +38,7 @@
             <div style="display:inline-block" class="form-group">
                 <label asp-for="GenreId" class="control-label"></label>
                 <select asp-for="GenreId" class="form-control">
-                   @foreach(var genre in ViewBag.Genres)
+                   @foreach(var genre in Model.Genres)
                    {
                        <option value="@genre.Id">@genre.Name</option>
                    }

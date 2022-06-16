@@ -39,13 +39,9 @@ namespace WebLibrary.Web.Controllers
         [Authorize(Roles ="admin")]
         public IActionResult AddBook()
         {
-            List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
-            List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
-            List<GenreCreateModel> genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
-            ViewBag.Authors = authors;
-            ViewBag.Publishers = publisher;
-            ViewBag.Genres = genres;
-            return View();
+            BookCreateModel model = new BookCreateModel();
+            PopulateDropDowns(model);
+            return View(model);
         }
 
         [HttpPost]
@@ -60,16 +56,10 @@ namespace WebLibrary.Web.Controllers
         [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult EditBook(Guid id)
-        {
-            List<AuthorViewModel> authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
-            List<PublisherViewModel> publisher = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
-            List<GenreCreateModel> genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
-            ViewBag.Authors = authors;
-            ViewBag.Publishers = publisher;
-            ViewBag.Genres = genres;
-
-            var book = _bookService.GetBookById(id);
-            return View(_mapper.Map<BookCreateModel>(book));
+        {  
+            var book = _mapper.Map<BookCreateModel>(_bookService.GetBookById(id));
+            PopulateDropDowns(book);
+            return View(book);
         }
 
         [HttpPost]
@@ -116,6 +106,14 @@ namespace WebLibrary.Web.Controllers
         {
             var genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
             return View(genres);
+        }
+
+        private BookCreateModel PopulateDropDowns(BookCreateModel model)
+        {
+            model.Authors = _mapper.Map<List<AuthorViewModel>>(_authorService.GetAll());
+            model.Publishers = _mapper.Map<List<PublisherViewModel>>(_publisherService.GetAll());
+            model.Genres = _mapper.Map<List<GenreCreateModel>>(_genreService.GetAll());
+            return model;
         }
 
 
