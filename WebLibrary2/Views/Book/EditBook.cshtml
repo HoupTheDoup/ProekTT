@@ -4,9 +4,8 @@
     ViewData["Title"] = "EditBook";
 }
 
-<h1>EditBook</h1>
+<h1>Edit Book</h1>
 
-<h4>BookCreateModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,7 +17,7 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
+                <label asp-for="AuthorId" class="control-label">Author</label>
                 <select asp-for="AuthorId" class="form-control">
                    @foreach(var author in Model.Authors)
                    {
@@ -27,7 +26,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="PublisherId" class="control-label"></label>
+                <label asp-for="PublisherId" class="control-label">Publisher</label>
                 <select asp-for="PublisherId" class="form-control">
                    @foreach(var publisher in Model.Publishers)
                    {
@@ -36,7 +35,7 @@
                 </select>
             </div>
             <div style="display:inline-block" class="form-group">
-                <label asp-for="GenreId" class="control-label"></label>
+                <label asp-for="GenreId" class="control-label">Genre</label>
                 <select asp-for="GenreId" class="form-control">
                    @foreach(var genre in Model.Genres)
                    {
@@ -46,6 +45,7 @@
             </div>
             <div style="display:inline-block">
                     <a asp-action="AddGenre">Create Genre</a>
+                    <a asp-action="ListGenres">Delete Genre</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

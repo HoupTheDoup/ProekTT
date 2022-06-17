@@ -54,12 +54,5 @@ namespace WebLibrary.Data.Repositories
             var authors = _dbContext.Authors.ToList();
             return _mapper.Map<List<AuthorDto>>(authors);
         }
-
-        /*   public string? GetAuthorName(Guid id)
-           {
-               var author = _dbContext.Authors.FirstOrDefault(a => a.Id == id);
-               return $"{author.FirstName} {author.LastName}";
-           }
-        */
     }
 }

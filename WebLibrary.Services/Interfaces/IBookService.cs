@@ -15,8 +15,6 @@ namespace WebLibrary.Services.Interfaces
 
         public void DeleteBook(Guid id);
 
-        public void DetailsBook(Guid id);
-
         public BookDto GetBookById(Guid id);
 
         public IEnumerable<T> GetAll<T>();
